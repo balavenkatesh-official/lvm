@@ -1,48 +1,53 @@
-# 1. create the lvm partition :
 
+$\color{red}{\textsf{1. create the lvm partition :}}$
 
-#### List available disks :
-```bash
 lsblk
-```
 
-#### Create a physical volume :
-```bash
 sudo pvcreate /dev/xvdf
-```
 
-#### Create a volume group :
-```bash
 sudo vgcreate vg1 /dev/xvdf
-```
 
-#### Create a logical volume :
-```bash
 sudo lvcreate -L 10G -n lv1 vg1
-```
 
-#### Format the logical volume :
-```bash
 sudo mkfs.ext4 /dev/vg1/lv1
-```
 
-#### Create a mount point directory :
-```bash
 sudo mkdir -p /opt/application
-```
 
-#### Mount the logical volume :
-```bash
-sudo mount /dev/vg1/lv1 /opt/application
-```
+sudo mount /dev/vg1/lv1 /opt/application  
 
-#### Edit /etc/fstab to add the following line :
-```bash
+$\color{green}{\textsf{Add this below line on "/etc/fstab" file for pemanent mount:}}$
+
 /dev/vg1/lv1  /opt/application  ext4  defaults  0  2
-```
 
-#### Verify the setup :
-```bash
 df -h /opt/application
-```
+
+
+$\color{red}{\textsf{2. Extend the lvm partition :}}$
+
+lsblk
+
+sudo pvcreate /dev/xvdg
+
+sudo vgextend vg1 /dev/xvdg
+
+sudo lvextend -L +10G /dev/vg1/lvm1
+
+sudo resize2fs /dev/vg1/lvm1
+
+df -h /opt/application
+
+$\color{red}{\textsf{3. Decrease the lvm partition :}}$
+
+sudo umount /opt/application
+
+sudo e2fsck -f /dev/vg1/lvm1
+
+sudo resize2fs /dev/vg1/lvm1 15G
+
+sudo lvreduce -L 15G /dev/vg1/lvm1
+
+sudo mount /dev/vg1/lvm1 /opt/application
+
+df -h /opt/application
+lvdisplay /dev/vg1/lvm1
 
