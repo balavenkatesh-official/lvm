@@ -1,7 +1,7 @@
 
 $\color{red}{\textsf{1. create the lvm partition :}}$
 
-lsblk
+lsblk -f
 
 sudo pvcreate /dev/xvdf
 
@@ -24,7 +24,7 @@ df -h /opt/application
 
 $\color{red}{\textsf{2. Extend the lvm partition :}}$
 
-lsblk
+lsblk -f
 
 sudo pvcreate /dev/xvdg
 
