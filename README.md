@@ -24,30 +24,31 @@ $\color{green}{\textsf{Add this below line on "/etc/fstab" file for pemanent mou
 
 $\color{red}{\textsf{2. Extend the lvm partition :}}$
 
-lsblk -f
+- lsblk -f
 
-sudo pvcreate /dev/xvdg
+- sudo pvcreate /dev/xvdg
 
-sudo vgextend vg1 /dev/xvdg
+- sudo vgextend vg1 /dev/xvdg
 
-sudo lvextend -L +10G /dev/vg1/lvm1
+- sudo lvextend -L +10G /dev/vg1/lvm1
 
-sudo resize2fs /dev/vg1/lvm1
+- sudo resize2fs /dev/vg1/lvm1
 
-df -h /opt/application
+- df -h /opt/application
 
 $\color{red}{\textsf{3. Decrease the lvm partition :}}$
 
-sudo umount /opt/application
+- sudo umount /opt/application
 
-sudo e2fsck -f /dev/vg1/lvm1
+- sudo e2fsck -f /dev/vg1/lvm1
 
-sudo resize2fs /dev/vg1/lvm1 15G
+- sudo resize2fs /dev/vg1/lvm1 15G
 
-sudo lvreduce -L 15G /dev/vg1/lvm1
+- sudo lvreduce -L 15G /dev/vg1/lvm1
 
-sudo mount /dev/vg1/lvm1 /opt/application
+- sudo mount /dev/vg1/lvm1 /opt/application
 
-df -h /opt/application
-lvdisplay /dev/vg1/lvm1
+- df -h /opt/application
+  
+- lvdisplay /dev/vg1/lvm1
 
