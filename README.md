@@ -1,25 +1,25 @@
 
 $\color{red}{\textsf{1. create the lvm partition :}}$
 
-lsblk -f
+- lsblk -f
 
-sudo pvcreate /dev/xvdf
+- sudo pvcreate /dev/xvdf
 
-sudo vgcreate vg1 /dev/xvdf
+- sudo vgcreate vg1 /dev/xvdf
 
-sudo lvcreate -L 10G -n lv1 vg1
+- sudo lvcreate -L 10G -n lv1 vg1
 
-sudo mkfs.ext4 /dev/vg1/lv1
+- sudo mkfs.ext4 /dev/vg1/lv1
 
-sudo mkdir -p /opt/application
+- sudo mkdir -p /opt/application
 
-sudo mount /dev/vg1/lv1 /opt/application  
+- sudo mount /dev/vg1/lv1 /opt/application  
 
 $\color{green}{\textsf{Add this below line on "/etc/fstab" file for pemanent mount:}}$
 
-/dev/vg1/lv1  /opt/application  ext4  defaults  0  2
+- /dev/vg1/lv1  /opt/application  ext4  defaults  0  2
 
-df -h /opt/application
+- df -h /opt/application
 
 
 $\color{red}{\textsf{2. Extend the lvm partition :}}$
