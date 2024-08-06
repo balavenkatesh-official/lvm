@@ -1,0 +1,17 @@
+# create a swap file with size :
+
+sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon -v /swapfile
+nano /etc/fstab [add the below line]
+/swapfile swap swap defaults 0 0
+
+# list the swap files :
+
+swapon -s
+
+# remove the swap memory : 
+
+sudo swapoff -v /swapfile
+rm -rf /swapfile
