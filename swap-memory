@@ -15,3 +15,34 @@ swapon -s
 
 sudo swapoff -v /swapfile
 rm -rf /swapfile
+
+#################################################################################################
+
+# swap partition :
+
+fdisk -l
+lsblk
+sudo fdisk /dev/sdb
+
+# Inside fdisk
+# Press n to create a new partition
+# Press p for primary partition
+# Choose a partition number
+# Press Enter to accept default starting sector
+# Type +2G (or desired size) for the size
+# Press t to change partition type
+# Enter 82 for Linux swap type
+# Press w to write changes and exit
+
+sudo mkswap /dev/sdb1
+sudo swapon /dev/sdb1
+swapon -s
+free -m
+
+# Add the swap partition to /etc/fstab to make it permanent
+sudo nano /etc/fstab
+
+# Add the following line
+/dev/sdb1   none    swap    sw    0   0
+
+
