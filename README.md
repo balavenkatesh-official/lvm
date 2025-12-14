@@ -54,7 +54,7 @@ $\color{red}{\textsf{3. Decrease the lvm partition :}}$
 
 $\color{red}{\textsf{3. Add additional disk and increase the VG and lvm partition :}}$
 
-Note: (The LV can be extended only by a single VG, so we need to attach all PV's with a single VG)
+Note: $\color{green}{\textsf{ The LV can be extended only by a single VG, so we need to attach all PV's with a single VG }}$
 
 - sudo vgextend vg1 /dev/xvdb
 
